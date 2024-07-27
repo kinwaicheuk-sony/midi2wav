@@ -27,6 +27,10 @@ import argparse
 import glob
 from tqdm.autonotebook import tqdm
 
+gpus = tf.config.experimental.list_physical_devices('GPU')
+for gpu in gpus:
+  tf.config.experimental.set_memory_growth(gpu, True)
+
 from midi_ddsp.data_handling.instrument_name_utils import \
   INST_NAME_TO_MIDI_PROGRAM_DICT, MIDI_PROGRAM_TO_INST_ID_DICT, \
   MIDI_PROGRAM_TO_INST_NAME_DICT
@@ -52,7 +56,7 @@ def load_pretrained_model(synthesis_generator_path=None,
   """Load pre-trained model weights."""
 #   package_dir = os.path.dirname(os.path.realpath(__file__))
 #   package_dir = '/home/kinwai/miniforge3/envs/ddsp/lib/python3.8/site-packages/midi_ddsp'
-  package_dir = '/root/mambaforge/envs/ddsp_py38/lib/python3.8/site-packages/midi_ddsp'
+  package_dir = 'midi-ddsp/midi_ddsp'
   print('package_dir:', package_dir)
   if not os.path.exists(os.path.join(package_dir,
                                      'midi_ddsp_model_weights_urmp_9_10')):
