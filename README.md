@@ -11,6 +11,23 @@ Python==3.8.0
 tensorflow==2.13.1
 ```
 
+If ffmpeg is not installed, the following error occurs
+
+> RuntimeWarning: Couldn't find ffmpeg or avconv - defaulting to ffmpeg, but may not work
+  warn("Couldn't find ffmpeg or avconv - defaulting to ffmpeg, but may not work", RuntimeWarning)
+
+To install it, try
+**Linux**
+```
+apt install ffmpeg
+```
+
+**Windows**
+```
+pip install ffmpeg-downloader
+ffdl install --add-path
+```
+
 ## Installation
 
 Try `pip install midi-ddsp` first.
@@ -41,4 +58,5 @@ python generate_audio.py --midi_dir <path-to-midi_dir> --output_dir <path-to-fol
 ```
 
 Notes:
-- On the RTX 4090, it takes about 30s per audio file, 31 minutes to finished 71 midi files.
+- It requires ~3GB of GPU VRAM depending on the midi file size.
+- On the RTX 4090, it takes about 30s per audio file, 29:13 minutes to finished 71 midi files.
