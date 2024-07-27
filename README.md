@@ -64,4 +64,5 @@ python generate_audio.py --midi_dir ./paired_midi/splits/part_6 --output_dir ./a
 
 Notes:
 - It requires ~3341MiB of GPU VRAM depending on the midi file size.
-- On the RTX 4090, it takes about 30s per audio file, 29:13 minutes to finished 71 midi files.
+- On the RTX 4090, it takes about 30s per audio file, 29:13 minutes to finish 71 midi files.
+- On the H100, it takes 48:35 minutes to finish 71 midi files, on average it takes 41s per audio file
