@@ -1,5 +1,5 @@
 ddsp/
 midi-ddsp/
 *.tar.gz
-paired_audio/
+paired_midi*/
 audio_output/

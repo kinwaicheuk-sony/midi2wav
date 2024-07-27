@@ -36,7 +36,7 @@ If it doesn't work, go inside the `ddsp` and `midi-ddsp` folder and `pip install
 
 ## Weight download
 ```
-python midi-ddsp/midi-ddsp/download_model_weights.py
+python midi-ddsp/midi_ddsp/download_model_weights.py
 ```
 
 It will download the models weight to `./midi-ddsp/midi_ddsp/midi_ddsp_model_weights_urmp_9_10`
@@ -57,6 +57,11 @@ python generate_audio.py --midi_path <path-to-midi> --output_dir <path-to-folder
 python generate_audio.py --midi_dir <path-to-midi_dir> --output_dir <path-to-folder>
 ```
 
+e.g.
+```
+python generate_audio.py --midi_dir ./paired_midi/splits/part_6 --output_dir ./audio_output/part_6
+```
+
 Notes:
-- It requires ~3GB of GPU VRAM depending on the midi file size.
+- It requires ~3341MiB of GPU VRAM depending on the midi file size.
 - On the RTX 4090, it takes about 30s per audio file, 29:13 minutes to finished 71 midi files.
