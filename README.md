@@ -78,4 +78,4 @@ One possible solution is
 
 https://dantkz.github.io/How-To-Debug-A-Memory-Leak-In-TensorFlow/
 
-LD_PRELOAD=/usr/lib/libtcmalloc.so.4 python generate_audio_debug_leakage.py --midi_dir ./paired_midi/splits/part_4 --output_dir ./audio_output --output_dir ./audio_output --skip_existing_files
+LD_PRELOAD="$(ldconfig -p | grep libtcmalloc_minimal.so.4 | tr ' ' '\n' | grep /)" python generate_audio_debug_leakage.py --midi_dir ./paired_midi/splits/part_4 --output_dir ./audio_output --output_dir ./audio_output --skip_existing_files
