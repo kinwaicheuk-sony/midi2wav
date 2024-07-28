@@ -59,10 +59,23 @@ python generate_audio.py --midi_dir <path-to-midi_dir> --output_dir <path-to-fol
 
 e.g.
 ```
-python generate_audio.py --midi_dir ./paired_midi/splits/part_6 --output_dir ./audio_output/part_6
+python generate_audio.py --midi_dir ./paired_midi/splits/part_7 --output_dir ./audio_output
 ```
+
+for i in {8..10};do python generate_audio.py --midi_dir ./paired_midi/splits/part_${i} --output_dir ./audio_output
+
+for 
 
 Notes:
 - It requires ~3341MiB of GPU VRAM depending on the midi file size.
 - On the RTX 4090, it takes about 30s per audio file, 29:13 minutes to finish 71 midi files.
 - On the H100, it takes 48:35 minutes to finish 71 midi files, on average it takes 41s per audio file
+
+# Memory leak
+It seems tensorflow is suffering from memory leak issue during inference and training.
+
+One possible solution is
+
+https://dantkz.github.io/How-To-Debug-A-Memory-Leak-In-TensorFlow/
+
+LD_PRELOAD=/usr/lib/libtcmalloc.so.4 python generate_audio_debug_leakage.py --midi_dir ./paired_midi/splits/part_4 --output_dir ./audio_output --output_dir ./audio_output --skip_existing_files

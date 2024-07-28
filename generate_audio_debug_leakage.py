@@ -31,6 +31,10 @@ import gc
 gpus = tf.config.experimental.list_physical_devices('GPU')
 for gpu in gpus:
   tf.config.experimental.set_memory_growth(gpu, True)
+  # tf.config.set_logical_device_configuration(
+  #     gpu,
+  #     [tf.config.LogicalDeviceConfiguration(memory_limit=4096)])
+  # logical_gpus = tf.config.list_logical_devices('GPU')  
 
 from midi_ddsp.data_handling.instrument_name_utils import \
   INST_NAME_TO_MIDI_PROGRAM_DICT, MIDI_PROGRAM_TO_INST_ID_DICT, \
