@@ -1,0 +1,3 @@
+[submodule "cocochorales"]
+	path = cocochorales
+	url = git@github.com:kinwaicheuk-sony/chamber-ensemble-generator.git
