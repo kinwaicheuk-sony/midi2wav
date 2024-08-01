@@ -3,3 +3,8 @@ midi-ddsp/
 *.tar.gz
 paired_midi*/
 audio_output/
+output_midi/
+random_midi_full_permutation/
+test_midi/
+test_midi_random/
+audio_eval_full_permutation/
