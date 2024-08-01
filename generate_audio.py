@@ -18,7 +18,7 @@
 import os
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
 import tensorflow as tf
 import numpy as np
@@ -135,10 +135,12 @@ def synthesize_midi(synthesis_generator, expression_generator, midi_file,
   # Check if there is existing files.
   filename = os.path.splitext(os.path.basename(midi_file))[0]
   if output_dir is not None:
+    midiname = os.path.basename(midi_file)
     trackname = os.path.basename(os.path.dirname(midi_file))
-    splitname = os.path.basename(os.path.dirname(os.path.dirname(midi_file)))
-    output_dir = os.path.join(output_dir, splitname, trackname)
-    if os.path.exists(output_dir) and skip_existing_files:
+    # splitname = os.path.basename(os.path.dirname(os.path.dirname(midi_file)))
+    # output_dir = os.path.join(output_dir, splitname, trackname)
+    output_dir = os.path.join(output_dir, trackname)
+    if os.path.exists(os.path.join(output_dir, midiname.replace('.mid', '.wav'))) and skip_existing_files:
       print(f'{midi_file} has been synthesized, will skip this file.')
       return
 
@@ -334,9 +336,16 @@ def main():
     raise ValueError('None of midi_dir or midi_path is provided. '
                      'Please provide at least one of midi_dir or midi_path.')
   elif args.midi_dir:
-    midi_file_list = glob.glob(os.path.join(args.midi_dir, '*', '*.mid'))
-    if len(midi_file_list) == 0:
-      raise FileNotFoundError('No midi files found in the directory.')
+    midi_file_list = glob.glob(os.path.join(args.midi_dir, '*.mid'))
+    # report the number of midi files found and ask if user wants to continue
+    print(f'Found {len(midi_file_list)} midi files in the directory.')
+    # prompt user to continue
+    # user_input = input('Do you want to continue? (y/n): ')
+    # if user_input.lower() == 'y':
+    #   print('User chose to continue.')
+    # else:
+    #   return
+    
     for midi_file in tqdm(midi_file_list, desc='Generating files: '):
       synthesize_midi(
         synthesis_generator,
@@ -351,6 +360,7 @@ def main():
         skip_existing_files=args.skip_existing_files,
         save_metadata=args.save_metadata,
       )
+
   elif args.midi_path:
     synthesize_midi(
       synthesis_generator,

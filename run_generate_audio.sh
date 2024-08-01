@@ -12,8 +12,23 @@ fi
 start_part=$1
 end_part=$2
 
-# Loop through the specified range
+# # Loop through the specified range
+# for ((i=start_part; i<=end_part; i++))
+# do
+#   python generate_audio.py \
+#   --midi_dir ./paired_midi/splits/part_$i \
+#   --output_dir ./audio_output \
+#   --skip_existing_files \
+#   --save_metadata
+# done
+
+# for Yin-Jyun project
 for ((i=start_part; i<=end_part; i++))
 do
-  python generate_audio.py --midi_dir ./paired_midi/splits/part_$i --output_dir ./audio_output --skip_existing_files
+  python generate_audio.py \
+  --midi_dir /workspace/midi2wav/random_midi_full_permutation/random_track$i \
+  --output_dir ./audio_eval_full_permutation \
+  --skip_existing_files \
+  --save_metadata
 done
+
